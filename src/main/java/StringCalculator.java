@@ -1,6 +1,7 @@
 //import org.omg.CORBA.SystemException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class StringCalculator {
@@ -8,19 +9,44 @@ public class StringCalculator {
         if (values.length() > 0) {
             int temp;
             String delimiter = null;
+
+            //List delimiters = new ArrayList<>();
+            int auxcount = 0;
             try {
                 temp = Integer.parseInt("" + values.charAt(0));
             } catch (Exception e) {
                 if (("" + values.charAt(0)) == "-") {
                     delimiter = null;
-                } else /*{
-                    delimiter = "" + values.charAt(0);
-                }*/
-                if (("" + values.charAt(0)).equals("[")) {
+                } else
+            //en este if itero el values para sacar la informacion de los caracteres que tengo antes del primer numero
+
+                if(values.contains("][")){
+                    System.out.println("aca1");
+                    for (int i = 0; i < values.length();i++){
+                       if(values.charAt(i)==']'){
+
+                           auxcount = i;
+
+                       }
+                    }
+                    String aux = "";
+
+                    for (int i = 0; i <= auxcount ;i++){
+                       aux += "" + values.charAt(i);
+                    }
+                    //tambien consigo llegar al limite y encontrar el delimitador
+
+                    delimiter = ""+ values.charAt(auxcount+2);
+                    System.out.println("delimiter "+delimiter);
+
+                    values = values.replace(aux,delimiter);
+                    System.out.println(values);
+                }else
+                    //este if lo hice para cuando solo hay  delimitadores en un grupo de []
+                    if (("" + values.charAt(0)).equals("[")) {
                     /*values.replace("[", ".").replace("]","@");*/
                     String aux = "[";
                     int count = 0;
-                    System.out.println("acaa");
                     delimiter = "" + values.charAt(1);
                     System.out.println("delimiter"+delimiter);
                     while (!("" + values.charAt(count)).equals("]")) {
@@ -34,13 +60,10 @@ public class StringCalculator {
             }
 
 
-            System.out.println(values);
+
             String[] splittedList = null;
             if (delimiter != null) {
-                /*if(delimiter.length()>1){
-                    splittedList = values.substring(values.length()+1).split(delimiter);
-                    System.out.println("Estoy dentro del if"+splittedList);
-                }*/
+
                 splittedList = values.substring(1, values.length()).split(delimiter);
                 System.out.println("splittedlist"+splittedList);
             } else {

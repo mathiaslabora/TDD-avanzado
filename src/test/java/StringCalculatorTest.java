@@ -69,4 +69,9 @@ public class StringCalculatorTest {
     public void diferentCharDelimiterTest() throws Exception {
         assertThat(stringCalculatorInstance.add("[###]2#3"), is(5));
     }
+
+    @Test
+    public void moreCharDelimiterTest() throws Exception {
+        assertThat(stringCalculatorInstance.add("[###][!!!]2!3"), is(5));
+    }
 }
