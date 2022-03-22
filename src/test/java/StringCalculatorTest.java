@@ -60,6 +60,7 @@ public class StringCalculatorTest {
         assertThat(stringCalculatorInstance.add("#2#3"), is(5));
     }
 
+    //desde aca pruebas propias
     @Test
     public void charDelimiterTest() throws Exception {
         assertThat(stringCalculatorInstance.add("[!!!!]2!3"), is(5));

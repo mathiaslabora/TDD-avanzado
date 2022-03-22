@@ -18,58 +18,61 @@ public class StringCalculator {
                 if (("" + values.charAt(0)) == "-") {
                     delimiter = null;
                 } else
-            //en este if itero el values para sacar la informacion de los caracteres que tengo antes del primer numero
+                    //en este if itero el values para sacar la informacion de los caracteres que tengo antes del primer numero
 
-                if(values.contains("][")){
-                    System.out.println("aca1");
-                    for (int i = 0; i < values.length();i++){
-                       if(values.charAt(i)==']'){
+                    if (values.contains("][")) {
+                        System.out.println("aca1");
+                        for (int i = 0; i < values.length(); i++) {
+                            if (values.charAt(i) == ']') {
 
-                           auxcount = i;
+                                auxcount = i;
 
-                       }
-                    }
-                    String aux = "";
+                            }
+                        }
+                        String aux = "";
 
-                    for (int i = 0; i <= auxcount ;i++){
-                       aux += "" + values.charAt(i);
-                    }
-                    //tambien consigo llegar al limite y encontrar el delimitador
+                        for (int i = 0; i <= auxcount; i++) {
+                            aux += "" + values.charAt(i);
+                        }
+                        //tambien consigo llegar al limite y encontrar el delimitador
 
-                    delimiter = ""+ values.charAt(auxcount+2);
-                    System.out.println("delimiter "+delimiter);
+                        delimiter = "" + values.charAt(auxcount + 2);
+                        System.out.println("delimiter " + delimiter);
 
-                    values = values.replace(aux,delimiter);
-                    System.out.println(values);
-                }else
-                    //este if lo hice para cuando solo hay  delimitadores en un grupo de []
-                    if (("" + values.charAt(0)).equals("[")) {
-                    /*values.replace("[", ".").replace("]","@");*/
-                    String aux = "[";
-                    int count = 0;
-                    delimiter = "" + values.charAt(1);
-                    System.out.println("delimiter"+delimiter);
-                    while (!("" + values.charAt(count)).equals("]")) {
+                        values = values.replace(aux, delimiter);
+                        System.out.println(values);
+                    } else
+                        //este if lo hice para cuando solo hay  delimitadores en un grupo de []
+                        if (("" + values.charAt(0)).equals("[")) {
+                            /*values.replace("[", ".").replace("]","@");*/
+                            String aux = "[";
+                            int count = 0;
+                            delimiter = "" + values.charAt(1);
+                            System.out.println("delimiter" + delimiter);
+                            while (!("" + values.charAt(count)).equals("]")) {
 
-                        count++;
-                        aux += "" + values.charAt(count);
+                                count++;
+                                aux += "" + values.charAt(count);
 
-                    }System.out.println("aux aqui" + aux);
-                    values = values.replace(aux, delimiter);
-                }else { delimiter = "" + values.charAt(0);}
+                            }
+                            System.out.println("aux aqui" + aux);
+                            values = values.replace(aux, delimiter);
+                        } else {
+                            delimiter = "" + values.charAt(0);
+                        }
             }
 
 
-
+            //splitedlist va a contener los numeros posteriormente para sumarlos
             String[] splittedList = null;
             if (delimiter != null) {
 
                 splittedList = values.substring(1, values.length()).split(delimiter);
-                System.out.println("splittedlist"+splittedList);
+                System.out.println("splittedlist" + splittedList);
             } else {
                 splittedList = values.split("[,|\n]");
             }
-
+            //aca hace la suma
             ArrayList<Integer> numberList = new ArrayList<Integer>();
             int accumulator = 0;
             for (String element : splittedList) {
